@@ -1,0 +1,4 @@
+# dbconnect-wine-app
+learning bes practice for creating a db gui from scratch. Using this to update my own database and to edit any other database updates.
+
+Using the env files, mongodb, and ejs methods has been a learning curve the last few weeks. Baisc CRUD appliacation and API usage has started to become routine and eventaully will be used with automated components. The next addtional features will have my main wine-api project using this outline and other user interface desigs. Currently exploring theatre.js and learning how to use it's features on certain components of design. Next project will focus on cleaning up a barcode scanner, and using said scanner with an API call to my database. Have currently barcode in my code but have to work on UI and design layout to make it more usable.
