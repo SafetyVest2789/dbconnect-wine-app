@@ -24,7 +24,7 @@ app.use(express.json())
 
 //THIS IS HOW WE CRUD APP//
 app.get('/', (request,response) =>{
-    db.collection('basic').find().toArray()
+    db.collection('wines.basic').find().toArray()
         .then(data => {
             let wineList = data.map(item => item.wineName)
             console.log(wineList)
@@ -47,11 +47,33 @@ app.post('/api', (request,response) => {
 
 app.put('/updateEntry', (request,response) => {
     console.log(request.body)
+    Object.keys(request.body).forEach(key => {
+        if (request.body[key] === null || request.body[key] === undefined || request.body[key]=== '') {
+            delete request.body[key];
+        }
+    });
+    console.log(request.body)
+    db.collection('basic').findOneAndUpdate(
+        {name: request.body.name},
+        {
+            $set: request.body
+        },
+    )
+    .then(result => {
+        console.log(result)
+        response.json('Success')
+    })
+    .catch(error => console.error(error))
 })
-
-
 app.delete('/deleteEntry', (request,response) =>{
-
+    db.collection('basic').deleteOne(
+        {name: request.body.name}
+    )
+    .then(result => {
+        console.log('Entry Deleted')
+        response.json('Entry Deleted')
+    })
+    .catch(error => console.error(error))
 })
 //LOCALHOST ON PORT SETUP//
 app.listen(process.env.PORT || PORT, () => {
