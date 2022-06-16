@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<section class="row"
-    <section class="column">
+<section class="row">
+    <section class= "column">
         <h2>Input API Data Here</h2>
         <form action="/api" method="POST">
             <input type="text" placeholder="wineName" name="wineName">
@@ -23,7 +23,6 @@
             <button type="submit">SUBMIT NEW</button>
             <button type="button" id="updateButton">UPDATE EXISTING</button>
         </form>    
-
     </section>
     <section class="column">
         <h2>Delete API Data Here</h2>
@@ -31,9 +30,9 @@
         <button id = "deleteButton">DELETE</button>
         
         <h2>Current Wine</h2>
-        <ul class="wines">
-            <% for(let i=0; i< info.length; i++) {%>
-                <li class="wineName">
+        <ul class="nameWines">
+            <% for(let i=0; i < info.length; i++) {%>
+                <li class="nameWines">
                     <span><%= info[i] %></span>
                 </li>    
             <% } %>

@@ -10,7 +10,7 @@ let db,
     dbConnectionStr = process.env.DB_STRING
     dbName = 'wines'
 
-MongoClient.connect(dbConnectionStr)
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true})
     .then(client =>{
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
@@ -24,7 +24,7 @@ app.use(express.json())
 
 //THIS IS HOW WE CRUD APP//
 app.get('/', (request,response) =>{
-    db.collection('wines.basic').find().toArray()
+    db.collection('basic').find().toArray()
         .then(data => {
             let wineList = data.map(item => item.wineName)
             console.log(wineList)
@@ -54,7 +54,7 @@ app.put('/updateEntry', (request,response) => {
     });
     console.log(request.body)
     db.collection('basic').findOneAndUpdate(
-        {name: request.body.name},
+        {wineName: request.body.name},
         {
             $set: request.body
         },
@@ -67,7 +67,7 @@ app.put('/updateEntry', (request,response) => {
 })
 app.delete('/deleteEntry', (request,response) =>{
     db.collection('basic').deleteOne(
-        {name: request.body.name}
+        {wineName: request.body.name}
     )
     .then(result => {
         console.log('Entry Deleted')
