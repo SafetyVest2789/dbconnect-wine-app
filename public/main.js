@@ -3,16 +3,16 @@ document.getElementById('deleteButton').addEventListener('click',deleteEntry)
 
 async function updateEntry() {
     try {
-        const response = await fetch('updateEntry', {
+        const response = await fetch('/updateEntry', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                wineName: document.getElementsByName("wineName")[0].value,
-                typeWine: document.getElementsByName("typeWine")[0].value,
-                foodPair: document.getElementsByName("foodPair")[0].value,
-                tanninsTaste: document.getElementsByName("tanninsTaste")[0].value,
-                priceDollar: document.getElementsByName("priceDollar")[0].value,
-                otherName: document.getElementsByName("otherName")[0].value,
+                name: document.getElementsByName("name")[0].value,
+                type: document.getElementsByName("type")[0].value,
+                food: document.getElementsByName("food")[0].value,
+                taste: document.getElementsByName("taste")[0].value,
+                price: document.getElementsByName("price")[0].value,
+                aka: document.getElementsByName("aka")[0].value,
                 features: document.getElementsByName("features")[0].value,
                 image: document.getElementsByName("image")[0].value
             })

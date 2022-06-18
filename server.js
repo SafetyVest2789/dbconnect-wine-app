@@ -7,10 +7,10 @@ require('dotenv').config()
 
 //VARIABLES FOR DATABASE//
 let db,
-    dbConnectionStr = process.env.DB_STRING
+    dbConnectionStr = process.env.DB_STRING,
     dbName = 'wines'
 
-MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true})
+MongoClient.connect(dbConnectionStr)
     .then(client =>{
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
@@ -26,11 +26,11 @@ app.use(express.json())
 app.get('/', (request,response) =>{
     db.collection('basic').find().toArray()
         .then(data => {
-            let wineList = data.map(item => item.wineName)
+            let wineList = data.map(item => item.name)
             console.log(wineList)
-            response.render('index.ejs', {info: wineList})
+            response.render('index.ejs', { info: wineList })
         })
-        .catch(error => console.log)
+        .catch(error => console.error(error))
 })
 
 
@@ -51,11 +51,11 @@ app.put('/updateEntry', (request,response) => {
         if (request.body[key] === null || request.body[key] === undefined || request.body[key]=== '') {
             delete request.body[key];
         }
-    });
+    })
     console.log(request.body)
     db.collection('basic').findOneAndUpdate(
-        {wineName: request.body.name},
-        {
+        {name: request.body.name},
+        {   
             $set: request.body
         },
     )
@@ -67,7 +67,7 @@ app.put('/updateEntry', (request,response) => {
 })
 app.delete('/deleteEntry', (request,response) =>{
     db.collection('basic').deleteOne(
-        {wineName: request.body.name}
+        {name: request.body.name}
     )
     .then(result => {
         console.log('Entry Deleted')
