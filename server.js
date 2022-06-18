@@ -22,7 +22,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-//THIS IS HOW WE CRUD APP//
+//THIS IS CRUD APP METHODS//
 app.get('/', (request,response) =>{
     db.collection('basic').find().toArray()
         .then(data => {
@@ -48,8 +48,8 @@ app.post('/api', (request,response) => {
 app.put('/updateEntry', (request,response) => {
     console.log(request.body)
     Object.keys(request.body).forEach(key => {
-        if (request.body[key] === null || request.body[key] === undefined || request.body[key]=== '') {
-            delete request.body[key];
+        if (request.body[key] === null || request.body[key] === undefined || request.body[key]=== "") {
+            delete request.body[key]
         }
     })
     console.log(request.body)

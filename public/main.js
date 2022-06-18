@@ -3,7 +3,7 @@ document.getElementById('deleteButton').addEventListener('click',deleteEntry)
 
 async function updateEntry() {
     try {
-        const response = await fetch('/updateEntry', {
+        const response = await fetch('updateEntry', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -31,7 +31,7 @@ async function deleteEntry() {
     try{
         const response = await fetch('deleteEntry', {
             method: 'delete',
-            headers: {'Content-Type' : 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 name: input.value
             })
