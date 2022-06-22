@@ -4,7 +4,7 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient
 const PORT = 8005
 require('dotenv').config()
-
+const cors = require('cors')
 //VARIABLES FOR DATABASE//
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -21,7 +21,7 @@ app.set('view engine','ejs')
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-
+app.use(cors())
 //THIS IS CRUD APP METHODS//
 app.get('/', (request,response) =>{
     db.collection('basic').find().toArray()
@@ -77,5 +77,5 @@ app.delete('/deleteEntry', (request,response) =>{
 })
 //LOCALHOST ON PORT SETUP//
 app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+    console.log(`Server likes to run on port ${PORT}`)
 })
